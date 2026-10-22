@@ -1,0 +1,194 @@
+/* ===== 1. Shared colors ===== */
+:root {
+    --teal: #24736e;
+    --dark: #193e3b;
+    --mint: #eef8f5;
+    --line: #d6e5e2;
+    --text: #183034;
+    --muted: #52676c;
+    --white: #fff;
+}
+
+/* ===== 2. Basic settings ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    /*background-color: var(--mint);*/
+    background-color: #fafdfc;
+
+    /* Keep the footer at the bottom on short pages */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    font: inherit;
+}
+
+/* Visible focus for keyboard users */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #cf8a25;
+    outline-offset: 4px;
+}
+
+/* ===== 3. Shared container ===== */
+.container {
+    width: 90%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+/* ===== 4. Header ===== */
+.site-header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+    min-height: 82px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+/* ===== 5. Brand / Logo ===== */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--teal);
+    font-size: 26px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.brand-mark {
+    font-size: 34px;
+    line-height: 1;
+}
+
+/* ===== 6. Navigation ===== */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.nav a {
+    padding: 24px 0;
+    border-bottom: 3px solid transparent;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Hover and current-page styles */
+.nav a:hover,
+.nav a[aria-current="page"] {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+}
+
+/* Hidden on desktop */
+.menu-toggle {
+    display: none;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background-color: var(--white);
+    color: var(--teal);
+    cursor: pointer;
+}
+
+.menu-toggle:hover {
+    background-color: var(--mint);
+}
+
+/* ===== 7. Main content area ===== */
+main {
+    flex: 1;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* ===== 8. Footer ===== */
+.site-footer {
+    padding: 28px 0;
+    background-color: var(--teal);
+    color: var(--white);
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.site-footer .brand {
+    color: var(--white);
+}
+
+.site-footer p {
+    margin: 4px 0;
+    font-size: 13px;
+}
+
+.copyright {
+    opacity: 0.85;
+}
+
+/* ===== 9. Tablet / Mobile ===== */
+@media (max-width: 850px) {
+    .header-inner {
+        flex-wrap: wrap;
+        padding: 14px 0;
+        gap: 0;
+    }
+
+    /* Show the Menu button */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Hide navigation until the button is clicked */
+    .nav {
+        display: none;
+        width: 100%;
+        padding-top: 12px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    /* JavaScript adds this class to open the menu */
+    .nav.is-open {
+        display: flex;
+    }
+
+    .nav a {
+        padding: 12px 0;
+    }
+
+    /* Stack footer content vertically */
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+}
