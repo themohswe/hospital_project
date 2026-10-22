@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Departments | CareHub
+        </title>
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/departments.css">
+        <!--
+        defer ကြောင့် HTML ကို ဆက်ဖတ်နေစဉ် JS ဖိုင်ကို download လုပ်နိုင်ပြီး၊
+         HTML ဖတ်ပြီးမှ JavaScript ကို run မယ်။ 
+         ဒါကြောင့် JS က header ထဲက button နဲ့ navigation ကို ရှာသုံးနိုင်တယ်။
+         -->
+        <script src="js/common.js" defer></script>
+    </head>
+
+    <body>
+        <!--Common Header-->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="home.html">
+                    <span class="brand-mark" aria-hidden="true">✚</span>
+                    CareHub
+                </a>
+                <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false">
+                    Menu
+                </button>
+
+                <nav class="nav" id="primary-nav" aria-label="Main navigation">
+                    <a href="home.html">Home</a>
+                    <a href="departments.html" aria-current="page">Departments</a>
+                    <a href="record.html">Patient Records</a>
+                    <a href="announcements.html">Announcements</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- This is the main part of the website. -->
+        <main id="main" class="container">
+
+        </main>
+
+        <!--Common footer-->
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <div>
+                    <span class="brand">✚ CareHub</span>
+                    <p>
+                        Care made simple.
+                    </p>
+                </div>
+                <div>
+                    <p>123 Sample Street, Seoul (fictional address)</p>
+                    <p>Phone : 02-000-0000 | Email : carehub@example.com</p>
+                </div>
+                <p class="copyright"> &copy; 2026 CareHub | Student demo</p>
+            </div>
+
+        </footer>
+    </body>
+</html>
