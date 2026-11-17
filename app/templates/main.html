@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Departments | CareHub
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+        <!--
+        defer ကြောင့် HTML ကို ဆက်ဖတ်နေစဉ် JS ဖိုင်ကို download လုပ်နိုင်ပြီး၊
+         HTML ဖတ်ပြီးမှ JavaScript ကို run မယ်။ 
+         ဒါကြောင့် JS က header ထဲက button နဲ့ navigation ကို ရှာသုံးနိုင်တယ်။
+         -->
+        <script src="../js/common.js" defer></script>
+    </head>
+
+    <body>
+        <!--Common Header-->
+        <!-- 🌟 Website တစ်ခုလုံးအတွက် Background Image Slider -->
+    <div class="body-bg-slider">
+        <div class="slides">
+            <img src="{{ url_for('static', filename='images/pic_1.png')}}" alt="Hospital Background 1">
+            <img src="{{ url_for('static', filename='images/pic_2.png')}}" alt="Hospital Background 2">
+            <img src="{{ url_for('static', filename='images/pic_3.png')}}" alt="Hospital Background 3">
+        </div>
+        <!-- ဓာတ်ပုံပေါ်မှာ စာသားတွေ ပိုမိုဖတ်ရလွယ်ကူစေရန် Dark Overlay ခံထားခြင်း -->
+        <div class="bg-overlay"></div>
+    </div>
+        <header class="site-header">
+            <div class="container header-inner">
+                <div class="brand-dropdown">
+                    <a class="brand">
+                        <span class="brand-mark" aria-hidden="true">✚</span>
+                        CareHub
+                    </a>
+                    <div class="hidden_container">
+                        <div class="info_hospital">
+                           <h2>Hello! Welcome to the CareHub Hospital. We are dedicated to providing exceptional healthcare services with professional medical staff and modern facilities.</h2>
+                        </div>
+                        <div class="contact">
+                            <h2>Request an Appointment <br>
+                            +10-1111-2222</h2>
+                            <h2>
+                                Office Hours / (Except holidays)
+                                <br> Mon-Fri. 9:00am~5:30pm
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false">
+                    Menu
+                </button>
+                <nav class="nav" id="primary-nav" aria-label="Main navigation">
+                    <a href="main.html" data-i18n="nav_dept" class="departments_hidden">home</a>
+                    <a href="departments.html" data-i18n="nav_dept" class="departments_hidden">departments</a>
+                    <a href="patient_dashboard.html" data-i18n="nav_records" class="record_hidden">Patient Records</a>
+                    <a href="announcements.html" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
+
+                    
+                    <button class="register-box">
+                        <a href="{{ url_for('auth.register') }} " style="text-decoration: none;">Register</a>
+                    </button>
+                    <button class="signIn-box">
+                        <a href="{{ url_for('auth.login') }}" style="text-decoration: none;">SignIn</a>
+                    </button>
+                    <button class="signIn-box">
+                        <a href="{{ url_for('patient.dashboard') }}" style="text-decoration: none;">Dashboard</a>
+                    </button>
+                </nav>
+            </div>
+             <!--If u click carehub-->
+
+        </header>
+        
+        <!-- This is the main part of the website. -->
+        <main id="main" class="container">
+            <!--new section-->
+            <section class="hero-slider-section">
+                
+                <!-- ပုံပေါ်တွင် ပေါ်နေမည့် ကြီးမားသော H1 စာသားများ -->
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <!-- ပထမပုံအတွက် စာသား -->
+                        <div class="hero-text text-1">
+                            <h2 data-i18n="first">Welcome to CareHub Hospital. <br>
+                                Your Health, Our Priority. Exceptional care with professional medical staff.
+                            </h2>
+                            
+                            <button type="button" class="hero-btn">Contact Us for Assistance</button>
+                        </div>
+                        
+                        <!-- ဒုတိယပုံအတွက် စာသား -->
+                        <div class="hero-text text-2">
+                            <h2 data-i18n="second">Advanced Medical Technology. <br>
+                                Equipped with state-of-the-art facilities for accurate diagnosis and treatment.
+                            </h2>
+                            <button type="button" class="hero-btn">Contact Us for Assistance</button>
+                        </div>
+                        
+                        <!-- တတိယပုံအတွက် စာသား -->
+                        <div class="hero-text text-3">
+                            <h2 data-i18n="third">24/7 Emergency Care Services. <br>
+                            Always here for you and your family whenever emergencies strike.
+                            </h2>
+                            <button type="button" class="hero-btn">Contact Us for Assistance</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+
+            <!--News Section-->
+            <section class="news-section">
+                <h2 class="news-title">News</h2>
+                <div class="locations-grid">
+                    <!-- Card 1: Map & Directions -->
+                    <a href="#news" class="location-card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='images/organoids.png')}}" alt="Map & Directions">
+                        </div>
+                        <div class="card-content">
+                            <span>A Seismic Shift From Animal to “Human-Based” Research Is Underway—Here’s What to Know About Organoids</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 2: Parking -->
+                    <a href="#news" class="location-card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='images/brain_new.png')}}" alt="Parking">
+                        </div>
+                        <div class="card-content">
+                            <span>Evolutionary history reveals why brains connect to opposite bodies</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 3: Outpatient Map -->
+                    <a href="#news" class="location-card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='images/coffee_new.png')}}" alt="Emergency Department">
+                        </div>
+                        <div class="card-content">
+                            <span>Coffee: What the research says about your daily caffeine intake</span>
+                        </div>
+                    </a>
+                </div>
+                <button type="button" class="news-button"><a href="announcement.html" style="text-decoration: none;">Browser All News +++</a></button>   
+                    
+            </section>
+
+        
+
+                    <!-- 🌟 Locations Section -->
+            <section class="locations-section">
+                <h2 class="locations-title">Locations</h2>
+                
+                <div class="locations-grid">
+                    <!-- Card 1: Map & Directions -->
+                    <a href="#map" class="location-card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='images/map.png')}}" alt="Map & Directions">
+                        </div>
+                        <div class="card-content">
+                            <span>Map & Directions</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 2: Parking -->
+                    <a href="#parking" class="location-card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='images/parking.png')}}" alt="Parking">
+                        </div>
+                        <div class="card-content">
+                            <span>Parking</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 3: Outpatient Map -->
+                    <a href="#outpatient" class="location-card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='images/emergency.png')}}" alt="Emergency Department">
+                        </div>
+                        <div class="card-content">
+                            <span>Emergency Department</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+                
+        </main>
+
+        <!--Common footer-->
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <div>
+                    <span class="brand">✚ CareHub</span>
+                    <p>
+                        Care made simple.
+                    </p>
+                </div>
+                <div>
+                    <p>123 Sample Street, Seoul (fictional address)</p>
+                    <p>Phone : 02-000-0000 | Email : carehub@example.com</p>
+                </div>
+                <p class="copyright"> &copy; 2026 CareHub | Student demo</p>
+            </div>
+        </footer>
+    </body>
+</html>

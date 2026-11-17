@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | CareHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/patient_dashboard.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css')}}">
+</head>
+
+<body>
+    <header class="site-header">
+            <div class="container header-inner">
+                <div class="brand-dropdown">
+                    <a class="brand">
+                        <span class="brand-mark" aria-hidden="true">✚</span>
+                        CareHub
+                    </a>
+                    <div class="hidden_container">
+                        <div class="info_hospital">
+                           <h2>Hello! Welcome to the CareHub Hospital. We are dedicated to providing exceptional healthcare services with professional medical staff and modern facilities.</h2>
+                        </div>
+                        <div class="contact">
+                            <h2>Request an Appointment <br>
+                            +10-1111-2222</h2>
+                            <h2>
+                                Office Hours / (Except holidays)
+                                <br> Mon-Fri. 9:00am~5:30pm
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false">
+                    Menu
+                </button>
+                <nav class="nav" id="primary-nav" aria-label="Main navigation">
+                    <a href="main.html" data-i18n="nav_dept" class="departments_hidden">home</a>
+                    <a href="departments.html" data-i18n="nav_dept" class="departments_hidden">departments</a>
+                    <a href="patient_dashboard.html" data-i18n="nav_records" class="record_hidden">Patient Records</a>
+                    <a href="announcements.html" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
+
+                    
+                    <button class="register-box">
+                        <a href="register.html" style="text-decoration: none;">Register</a>
+                    </button>
+                    <button class="signIn-box">
+                        <a href="signIn.html" style="text-decoration: none;">SignIn</a>
+                    </button>
+                </nav>
+            </div>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-menu">
+            <p class="menu-title">MENU</p>
+
+            <a href="#" class="menu-item active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▤</span> Medical History
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♧</span> Test Results
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▣</span> Prescriptions
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▦</span> Appointments
+            </a>
+
+            <p class="menu-title">ACCOUNT</p>
+
+            <a href="#" class="menu-item">
+                <span>♙</span> My Profile
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⚙</span> Settings
+            </a>
+
+        </div>
+
+        <div class="sidebar-bottom">
+            <a href="#" class="menu-item logout">
+                <span>↪</span> Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Navigation -->
+        <header class="topbar">
+
+            <div>
+                <h2>Dashboard</h2>
+                <p>Welcome back to CareHub!</p>
+            </div>
+
+            <div class="topbar-right">
+                <button class="notification-btn" aria-label="Notifications">
+                    ♧
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="profile">
+                    <div class="profile-avatar">JS</div>
+                    <div class="profile-info">
+                        <strong>{{ patient["name"] }}</strong>
+                        <small>Patient</small>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="welcome-section">
+
+            <div>
+                <h1>Hello, {{ patient["name"] }}👋</h1>
+                <p>Here's an overview of your health information.</p>
+            </div>
+
+            <div class="patient-id">
+                <span>Patient ID</span>
+                <strong>PT-2026-001</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Summary Cards -->
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <div class="card-icon blue">▤</div>
+                <div>
+                    <p>Total Medical Records</p>
+                    <h2>12</h2>
+                    <small>All recorded visits</small>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon purple">♧</div>
+                <div>
+                    <p>Lab Test Results</p>
+                    <h2>8</h2>
+                    <small>Available results</small>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon orange">▣</div>
+                <div>
+                    <p>Prescriptions</p>
+                    <h2>3</h2>
+                    <small>Medical prescriptions</small>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon green">▦</div>
+                <div>
+                    <p>Appointments</p>
+                    <h2>2</h2>
+                    <small>Upcoming appointments</small>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Content Grid -->
+        <section class="content-grid">
+
+            <!-- Recent Medical History -->
+            <div class="content-card history-card">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Recent Medical History</h3>
+                        <p>Your latest medical records</p>
+                    </div>
+
+                    <a href="#" class="view-all">
+                        View All →
+                    </a>
+                </div>
+
+                <div class="history-list">
+
+                    <div class="history-item">
+                        <div class="history-icon blue">🩸</div>
+
+                        <div class="history-details">
+                            <strong>Blood Test</strong>
+                            <p>Laboratory Department</p>
+                            <small>October 25, 2026</small>
+                        </div>
+
+                        <span class="status completed">
+                            Completed
+                        </span>
+                    </div>
+
+
+                    <div class="history-item">
+                        <div class="history-icon purple">🩻</div>
+
+                        <div class="history-details">
+                            <strong>Chest X-Ray</strong>
+                            <p>Radiology Department</p>
+                            <small>October 12, 2026</small>
+                        </div>
+
+                        <span class="status completed">
+                            Completed
+                        </span>
+                    </div>
+
+
+                    <div class="history-item">
+                        <div class="history-icon orange">✚</div>
+
+                        <div class="history-details">
+                            <strong>General Checkup</strong>
+                            <p>General Medicine</p>
+                            <small>September 18, 2026</small>
+                        </div>
+
+                        <span class="status completed">
+                            Completed
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Upcoming Appointments -->
+            <div class="content-card appointment-card">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Upcoming Appointments</h3>
+                        <p>Your scheduled visits</p>
+                    </div>
+                </div>
+
+                <div class="appointment-item">
+
+                    <div class="appointment-date">
+                        <strong>05</strong>
+                        <span>NOV</span>
+                    </div>
+
+                    <div class="appointment-details">
+                        <strong>General Checkup</strong>
+                        <p>Dr. Michael Brown</p>
+                        <small>10:30 AM</small>
+                    </div>
+
+                </div>
+
+                <div class="appointment-item">
+
+                    <div class="appointment-date">
+                        <strong>12</strong>
+                        <span>NOV</span>
+                    </div>
+
+                    <div class="appointment-details">
+                        <strong>Dental Examination</strong>
+                        <p>Dr. Emily Wilson</p>
+                        <small>02:00 PM</small>
+                    </div>
+
+                </div>
+
+                <a href="#" class="appointment-link">
+                    View All Appointments →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Health Information -->
+        <section class="content-card health-card">
+
+            <div class="section-header">
+                <div>
+                    <h3>Health Information</h3>
+                    <p>Your personal health information</p>
+                </div>
+
+                <a href="#" class="view-all">View Profile →</a>
+            </div>
+
+            <div class="health-grid">
+
+                <div class="health-item">
+                    <span>Blood Type</span>
+                    <strong>O+</strong>
+                </div>
+
+                <div class="health-item">
+                    <span>Height</span>
+                    <strong>175 cm</strong>
+                </div>
+
+                <div class="health-item">
+                    <span>Weight</span>
+                    <strong>70 kg</strong>
+                </div>
+
+                <div class="health-item">
+                    <span>Allergies</span>
+                    <strong>None recorded</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            © 2026 CareHub Hospital. All rights reserved.
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
