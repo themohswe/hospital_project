@@ -1,0 +1,9 @@
+CREATE TABLE user_account(
+user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+patient_id INTEGER NOT NULL UNIQUE,
+email TEXT NOT NULL UNIQUE,
+password_hash TEXT NOT NULL UNIQUE,
+created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (patient_id)
+REFERENCES patient(patient_id));
+

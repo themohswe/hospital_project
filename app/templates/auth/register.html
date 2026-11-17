@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | CareHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}">
+</head>
+
+<body>
+    <main class="register-page">
+
+        <header class="register-header">
+            <a href="{{ url_for('main.home')}}" class="brand">
+                <span class="brand-mark">✚</span>
+                <span>CareHub</span>
+            </a>
+
+            <p class="brand-subtitle">
+                Your Health, Our Priority
+            </p>
+        </header>
+
+        <section class="register-section">
+            <h1>Sign up</h1>
+            <p class="subtitle">
+                Create an account to continue.
+            </p>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/register" method="POST"
+                  class="register-form">
+
+                <div class="name-row">
+                    <div class="form-group floating-label">
+                        <label for="firstName">First Name</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="first_name"
+                            placeholder=" "
+                            autocomplete="given-name"
+                            required>
+                    </div>
+
+                    <div class="form-group floating-label">
+                        <label for="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="last_name"
+                            placeholder=" "
+                            autocomplete="family-name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group floating-label">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="name@email.com"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <input
+                        type="text"
+                        id="patient_id"
+                        name="patient_id"
+                        placeholder="Enter Your Patient Id"
+                        autocomplete="patient-id"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirm_password"
+                        placeholder="Confirm Password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required>
+                </div>
+
+                <button type="submit" class="register-button">
+                    CREATE ACCOUNT
+                </button>
+            </form>
+
+            <div class="register-footer">
+                <a href="{{ url_for('main.home')}}" class="back-link">
+                    <span aria-hidden="true">←</span> Back
+                </a>
+
+                <p>
+                    Already have an account?
+                    <a href="{{ url_for('auth.login')}}" class="login-link">
+                        Log in
+                    </a>
+                </p>
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            © 2026 CareHub | Hospital
+        </footer>
+
+    </main>
+</body>
+</html>
