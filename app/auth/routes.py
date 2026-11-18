@@ -29,6 +29,7 @@ def login():
         user = services.authenticate(email, password)
         if user:
             session.clear()
+            session.permanent = True
             session["user_id"] = user["user_id"]
             session["patient_id"] = user["patient_id"]
             return redirect(url_for('patient.dashboard'))

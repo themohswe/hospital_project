@@ -47,7 +47,7 @@
                         <a href="register.html" style="text-decoration: none;">Register</a>
                     </button>
                     <button class="signIn-box">
-                        <a href="signIn.html" style="text-decoration: none;">SignIn</a>
+                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">logout</a>
                     </button>
                 </nav>
             </div>
@@ -138,7 +138,7 @@
 
             <div class="patient-id">
                 <span>Patient ID</span>
-                <strong>PT-2026-001</strong>
+                <strong>{{ patient["patient_id"]}}</strong>
             </div>
 
         </section>
@@ -151,7 +151,7 @@
                 <div class="card-icon blue">▤</div>
                 <div>
                     <p>Total Medical Records</p>
-                    <h2>12</h2>
+                    <h2>{{ total_records }}</h2>
                     <small>All recorded visits</small>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                 <div class="card-icon purple">♧</div>
                 <div>
                     <p>Lab Test Results</p>
-                    <h2>8</h2>
+                    <h2>{{ lab_count }}</h2>
                     <small>Available results</small>
                 </div>
             </div>
@@ -205,51 +205,29 @@
 
                 <div class="history-list">
 
+                    {% for r in records[:5]%}
                     <div class="history-item">
-                        <div class="history-icon blue">🩸</div>
-
-                        <div class="history-details">
-                            <strong>Blood Test</strong>
-                            <p>Laboratory Department</p>
-                            <small>October 25, 2026</small>
+                        <div class="history-icon {{ loop.cycle('blue', 'purple', 'orange') }}">
+                            {% if r["department"] == "Laboratory" %} 🩸
+                            {% elif r["department"] == "Radiology" %} 🩻
+                            {% else %}✚
+                            {% endif %}
                         </div>
 
+                        <div class="history-details">
+                            <strong>{{ r["test_name"] }}</strong>
+                            <p>{{ r["department"] or "General" }} Department</p>
+                            <small>{{ r["record_date"] or "-" }}</small>
+                        </div>
                         <span class="status completed">
                             Completed
                         </span>
-                    </div>
-
-
-                    <div class="history-item">
-                        <div class="history-icon purple">🩻</div>
-
-                        <div class="history-details">
-                            <strong>Chest X-Ray</strong>
-                            <p>Radiology Department</p>
-                            <small>October 12, 2026</small>
                         </div>
+                        {% else %}
+                        <p>No medical records yet.</p>
+                        {% endfor %}
 
-                        <span class="status completed">
-                            Completed
-                        </span>
                     </div>
-
-
-                    <div class="history-item">
-                        <div class="history-icon orange">✚</div>
-
-                        <div class="history-details">
-                            <strong>General Checkup</strong>
-                            <p>General Medicine</p>
-                            <small>September 18, 2026</small>
-                        </div>
-
-                        <span class="status completed">
-                            Completed
-                        </span>
-                    </div>
-
-                </div>
 
             </div>
 

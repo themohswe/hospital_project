@@ -16,8 +16,13 @@ def create_app(config_class=DevelopmentConfig):
     app.register_blueprint(auth_bp)
     app.register_blueprint(patient_bp)
 
-    return app
+    @app.after_request
+    def add_no_cache_headers(response):
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        return response
 
+    return app
 
 
 

@@ -54,7 +54,7 @@
                 <nav class="nav" id="primary-nav" aria-label="Main navigation">
                     <a href="main.html" data-i18n="nav_dept" class="departments_hidden">home</a>
                     <a href="departments.html" data-i18n="nav_dept" class="departments_hidden">departments</a>
-                    <a href="patient_dashboard.html" data-i18n="nav_records" class="record_hidden">Patient Records</a>
+                    <a href="{{ url_for('patient.dashboard')}}" data-i18n="nav_records" class="record_hidden">Patient Records</a>
                     <a href="announcements.html" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
 
                     
@@ -64,9 +64,7 @@
                     <button class="signIn-box">
                         <a href="{{ url_for('auth.login') }}" style="text-decoration: none;">SignIn</a>
                     </button>
-                    <button class="signIn-box">
-                        <a href="{{ url_for('patient.dashboard') }}" style="text-decoration: none;">Dashboard</a>
-                    </button>
+
                 </nav>
             </div>
              <!--If u click carehub-->

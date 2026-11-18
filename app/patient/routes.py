@@ -10,6 +10,7 @@ patient_bp = Blueprint("patient", __name__, url_prefix="/patient")
 def dashboard():
     db = get_db()
 
+
     patient = db.execute(
         "SELECT * FROM patient WHERE patient_id = ?",
         (session["patient_id"],),
@@ -22,5 +23,9 @@ def dashboard():
         (session["patient_id"],),
     ).fetchall()
 
+    total_records = len(records)
+    lab_count = sum(1 for r in records if r["department"] == "Laboratory")
+
+
     return render_template("patient/patient_dashboard.html",
-                           patient=patient, records=records)
+                           patient=patient, records=records, total_records=total_records, lab_count=lab_count)
