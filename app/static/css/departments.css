@@ -1,0 +1,365 @@
+.page-intro{
+    margin-bottom:28px; 
+}
+
+.page-intro h1{
+    margin: 0 0 10px;
+    font-size : 36px;
+    line-height: 1.2;
+}
+
+.page-intro p{
+    margin: 0; 
+    color: var(--muted);
+}
+
+/* === Search area === */
+.doctor-search-section{
+    margin-bottom: 28px;
+    padding: 24px;
+    border-radius: 12px;
+    background-color: var(--mint);
+}
+
+.search-field{
+    margin-bottom: 18px;
+}
+
+.search-field label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Position the search icons inside the input */
+.search-input-wrapper{
+    position: relative;
+}
+
+.search-input-wrapper i{
+    position: absolute;
+    left: 14px; 
+    top: 50%;
+    transform : translateY(-50%);
+    color: var(--muted); 
+    pointer-events: none; 
+}
+
+.search-input-wrapper input{
+    width: 100%;    
+    padding: 12px 14px 12px 42px;
+    border : 1px solid var(--line);
+    border-radius: 70px;
+    background-color: var(--white);
+    color : var(--text);
+    font : inherit;
+}
+
+.search-input-wrapper input:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+}
+
+/* ===== Category buttons ===== 
+flex-wrap : wrap --> buttons တွေနေရာ မလောက်ရင် next line ဆင်းမယ် 
+white-space : normal --> button တစ်ခုမှာ စာသား ရှည်လွန်းရင် button အတွင်းမှာလည်း စာကြောင်းဆင်းနိုင်တယ်
+*/
+.department-filters {
+    display: flex;
+    flex-wrap: wrap;
+    
+    gap : 10px;
+}
+
+.filter-button {
+    max-width: 100%;
+    padding : 10px 16px; 
+    border : 1px solid var(--line);
+    border-radius : 24px;
+    background-color: var(--white);
+    color: var(--text);
+    font: inherit;
+    line-height: 1.4;
+    white-space : normal;
+    cursor: pointer;
+}
+
+/* Selected category */
+/* aira-pressed=true ဖြစ်နေတဲ့ဟာ တစ်ခုပဲ ပြောင်းတာ 
+button change ချင်ရင် js နဲ့ လုပ်ရမယ် */
+
+.filter-button[aria-pressed="true"]{
+    border-color: var(--teal);
+    background-color: var(--teal);
+    color: var(--white);
+}
+
+.filter-button:hover {
+    border-color: var(--teal);
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 600px) {
+    .page-intro h1 {
+        font-size: 28px;
+    }
+
+    .doctor-search-section {
+        padding: 18px;
+    }
+
+    .filter-button {
+        padding: 8px 14px;
+    }
+}
+
+/* ==== Department results ==== */
+.department-results {
+    margin-top: 32px;
+}
+
+.department-results h2{
+    margin: 0 0 6px;
+    font-size: 26px;
+}
+
+#department-count{
+    margin: 0 0 20px;
+    color: var(--muted)
+}
+
+/* ==== Department grid ==== 
+ repeat(4, minmax(0, 1fr)) --> အကျယ်တူ column ၄ ခု, 
+ minmax(0, 1fr) က နာမည်ရှည်တဲ့ card ကြောင့် column အကျယ် အတင်းမကြီးသွားအောင် ကူညီပေးတယ်
+ gap : 20px --> Card တွေကြားမှာ အလျားလိုက်ရော ဒေါင်လိုက်ရော 20px ခြားမယ် 
+*/
+
+.department-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap : 20px;
+}
+
+/* ==== Department card ==== 
+flex-direction: column; --> card ထဲက ဟာတွေကို column အလိုက်(အပေါ်အောက် စီတာ) */
+.department-card{
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+
+    padding : 24px; 
+    border : 1px solid var(--line);
+    border-radius: 12px;
+
+    background-color: var(--white);
+    color: var(--text);
+    text-decoration: none;
+
+    transition: 
+        background-color 0.2s, 
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+/* Icon */
+.department-card i{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+    border-radius : 50%;
+
+    background-color: var(--mint);
+    color: var(--teal);
+    font-size: 26px;
+}
+
+/* Department name */
+.department-card h3{
+    margin: 0 0 8px;
+    font-size: 18px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+/* Category name */
+.department-card p{
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Hover */
+.department-card:hover{
+    border-color : var(--teal);
+    background-color : var(--mint);
+    box-shadow: 0 4px 12px rgba(36, 115, 110, 0.8);
+}
+
+/*Keyboard focus*/
+.department-card:focus-visible{
+    outline: 3px solid var(--teal);
+    outline-offset: 4px;
+}
+
+/* No results msg */
+#department-empty{
+    padding: 24px;
+    border-radius: 10px;
+    background-color: var(--mint);
+    color: var(--muted);
+    text-align : center;
+}
+   
+/* Keep filtered cards hidden even though they use display: flex */
+
+.department-card[hidden],
+#department-empty[hidden] {
+    display: none;
+}
+
+/* ===== Tablet: 3 columns ===== */
+@media (max-width: 1000px) {
+    .department-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* ===== Small tablet: 2 columns ===== */
+@media (max-width: 750px) {
+    .department-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+/* ===== Mobile: 1 column ===== */
+@media (max-width: 480px) {
+    .department-grid {
+        grid-template-columns: 1fr;
+    }
+    .department-card {
+        padding: 20px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .department-card {
+        transition: none;
+    }
+
+}
+
+/* ===== Doctor search results ===== */
+.doctor-search-results {
+    margin-top: 36px;
+}
+
+.doctor-search-results h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+}
+
+#doctor-search-count {
+    margin: 0 0 20px;
+    color: var(--muted);
+}
+
+.doctor-search-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Clickable doctor result */
+.doctor-result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    background-color: var(--white);
+    color: var(--text);
+    text-decoration: none;
+}
+
+.doctor-result-card:hover {
+    border-color: var(--teal);
+    background-color: var(--mint);
+}
+
+.doctor-result-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+
+    background-color: var(--mint);
+    color: var(--teal);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.doctor-result-card h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    overflow-wrap: anywhere;
+}
+
+.doctor-result-card p {
+    margin: 0 0 12px;
+    color: var(--muted);
+}
+
+.doctor-result-card .doctor-result-department {
+    color: var(--teal);
+    font-weight: 600;
+}
+
+.doctor-result-action {
+    margin-top: auto;
+    padding-top: 12px;
+    color: var(--teal);
+    font-weight: 600;
+}
+
+#doctor-search-empty,
+#search-error {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--mint);
+    color: var(--text);
+}
+
+#doctor-search-results[hidden],
+#doctor-search-empty[hidden],
+#search-error[hidden] {
+    display: none;
+}
+
+@media (max-width: 850px) {
+    .doctor-search-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .doctor-search-grid {
+        grid-template-columns: 1fr;
+    }
+}

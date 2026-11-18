@@ -1,4 +1,7 @@
-/* ===== 1. Shared colors ===== */
+/* =========================================================
+   1. Shared colors
+   ========================================================= */
+
 :root {
     --teal: #24736e;
     --dark: #193e3b;
@@ -9,24 +12,31 @@
     --white: #fff;
 }
 
-/* ===== 2. Basic settings ===== */
-* {
+
+/* =========================================================
+   2. Basic page settings
+   ========================================================= */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     color: var(--text);
-    /*background-color: var(--mint);*/
     background-color: #fafdfc;
 
-    /* Keep the footer at the bottom on short pages */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    /* Keeps the Home background slider behind the content. */
+    isolation: isolate;
 }
 
 a {
@@ -37,47 +47,43 @@ button {
     font: inherit;
 }
 
-/* Visible focus for keyboard users */
 a:focus-visible,
 button:focus-visible {
     outline: 3px solid #cf8a25;
     outline-offset: 4px;
 }
 
-/* ===== 3. Shared container ===== */
 .container {
     width: 90%;
     max-width: 1120px;
     margin: 0 auto;
 }
 
-main {
-    flex: 1;
-    padding-top: 100px;   /* 82px ထက်နည်းနည်းပို */
-    padding-bottom: 40px;
-}
 
-/* ===== 4. Header ===== */
+/* =========================================================
+   3. Shared header and logo
+   ========================================================= */
+
 .site-header {
-    position: fixed;   /* 🌟 Screen ပေါ်တွင် အမြဲငြိမ်နေစေရန် */
+    /* Stays at the top while scrolling and keeps its own space. */
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* အောက်ဘက်တွင် အရိပ်လေး ပေါ်နေစေရန် */
-    border-bottom: 1px solid var(--line);
     z-index: 9999;
+    flex-shrink: 0;
+
+    background-color: var(--white);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .header-inner {
     min-height: 82px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 24px;
 }
 
-/* ===== 5. Brand / Logo ===== */
 .brand {
     display: inline-flex;
     align-items: center;
@@ -95,9 +101,12 @@ main {
     line-height: 1;
 }
 
-/* ===== 6. Navigation ===== */
+
+/* =========================================================
+   4. Shared navigation
+   ========================================================= */
+
 .nav {
-    
     display: flex;
     align-items: center;
     gap: 26px;
@@ -110,14 +119,14 @@ main {
     text-decoration: none;
 }
 
-/* Hover and current-page styles */
+/* "page" for the current page; "location" for its section. */
 .nav a:hover,
-.nav a[aria-current="page"] {
+.nav a[aria-current="page"],
+.nav a[aria-current="location"] {
     color: var(--teal);
     border-bottom-color: var(--teal);
 }
 
-/* Hidden on desktop */
 .menu-toggle {
     display: none;
     padding: 8px 12px;
@@ -132,14 +141,24 @@ main {
     background-color: var(--mint);
 }
 
-/* ===== 7. Main content area ===== */
+
+/* =========================================================
+   5. Shared main content
+   ========================================================= */
+
+/* The sticky header already occupies space above main.
+   This padding is just the gap below the header. */
 main {
     flex: 1;
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
-/* ===== 8. Footer ===== */
+
+/* =========================================================
+   6. Shared footer
+   ========================================================= */
+
 .site-footer {
     padding: 28px 0;
     background-color: var(--teal);
@@ -166,132 +185,68 @@ main {
     opacity: 0.85;
 }
 
-/* ===== 9. Tablet / Mobile ===== */
-@media (max-width: 850px) {
-    .header-inner {
-        flex-wrap: wrap;
-        padding: 14px 0;
-        gap: 0;
-    }
-
-    /* Show the Menu button */
-    .menu-toggle {
-        display: block;
-    }
-
-    /* Hide navigation until the button is clicked */
-    .nav {
-        display: none;
-        width: 100%;
-        padding-top: 12px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-    }
-    /* JavaScript adds this class to open the menu */
-    .nav.is-open {
-        display: flex;
-    }
-
-    .nav a {
-        padding: 12px 0;
-    }
-
-    /* Stack footer content vertically */
-    .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
-    }
-}
-
-/*To change the current language*/
-.lang-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.lang-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
+.footer-contact p {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #333;
-    padding: 5px 10px;
+    gap: 10px;
+    margin: 8px 0;
 }
 
-.earth-icon {
+.footer-contact i {
+    flex: 0 0 20px;
     font-size: 16px;
+    text-align: center;
+    color: var(--white);
 }
 
-/* Dropdown Menu ပုံစံ */
-.lang-menu {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: #ffffff;
-    min-width: 140px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    z-index: 1000;
-    padding: 6px 0;
-    margin-top: 5px;
-}
-
-/* ပုံစံပေါ်လာသည့်အခါ သုံးရန် Class */
-.lang-menu.show {
-    display: block;
-}
-
-.lang-menu a {
-    color: #333;
-    padding: 10px 16px;
+.footer-contact a {
+    color: inherit;
     text-decoration: none;
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.2s;
 }
 
-.lang-menu a:hover {
-    background-color: #f1f3f5;
-    color: #0056b3;
+.footer-contact a:hover,
+.footer-contact a:focus-visible {
+    text-decoration: underline;
 }
 
-/*Css for hidden menu box*/
 
-.hidden-menu {
-    background-color: #f8f9fa;
-    border: 2px solid #0056b3;
-    padding: 15px 20px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 6px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+/* =========================================================
+   7. Home header: CareHub information dropdown
+   ========================================================= */
+
+.brand-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
-
-/*Css for hidden-box for carehub logo*/
 
 .hidden_container {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 700px;
-    background-color: #ffffff;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    border-radius: 0 0 8px 8px;
-    border-top: 3px solid #0056b3;
     z-index: 1000;
+
     display: flex;
+    width: min(700px, 90vw);
     max-height: 0;
     overflow: hidden;
+    visibility: hidden;
     opacity: 0;
-    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+
+    background-color: var(--white);
+    border-top: 3px solid #0056b3;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.brand-dropdown:hover .hidden_container,
+.brand-dropdown:focus-within .hidden_container {
+    max-height: min(440px, 65vh);
+    overflow-y: auto;
+    visibility: visible;
+    opacity: 1;
 }
 
 .hidden_container .info_hospital,
@@ -302,108 +257,209 @@ main {
 
 .hidden_container .info_hospital {
     border-right: 1px solid #eee;
-}
-
-.hidden_container h2 {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-.hidden_container .info_hospital {
     font-size: 15px;
     color: #555;
 }
 
-.brand-dropdown {
+.hidden_container h2 {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.hidden-menu {
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border: 2px solid #0056b3;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================================================
+   8. Home header: Register / Sign In / Dashboard
+   ========================================================= */
+
+.register-box,
+.signIn-box {
+    padding: 5px;
+    border: 3px solid #066a75;
+    border-radius: 30px;
+    background-color: #066a75;
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* The current Home HTML places a link inside each button. */
+.nav .register-box a,
+.nav .signIn-box a {
+    display: block;
+    padding: 2px 8px;
+    border: 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.register-box:hover,
+.signIn-box:hover {
+    background-color: var(--dark);
+    border-color: var(--dark);
+}
+
+
+/* =========================================================
+   9. Optional language dropdown
+   These styles only apply if the language controls exist.
+   ========================================================= */
+
+.lang-dropdown {
     position: relative;
     display: inline-block;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+
+    border: 0;
+    background: transparent;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    
-}
-.brand-dropdown:hover .hidden_container {
-    max-height: 250px;
-    opacity: 1;
 }
 
-/* ===== Background Image Slider Styles ===== */
+.earth-icon {
+    font-size: 16px;
+}
 
-/* 🌟 Website တစ်ခုလုံး၏ နောက်ခံ Slider Layer */
+.lang-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+
+    min-width: 140px;
+    margin-top: 5px;
+    padding: 6px 0;
+    border-radius: 8px;
+    background-color: var(--white);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.lang-menu.show {
+    display: block;
+}
+
+.lang-menu a {
+    display: block;
+    padding: 10px 16px;
+    border: 0;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.lang-menu a:hover {
+    background-color: #f1f3f5;
+    color: #0056b3;
+}
+
+
+/* =========================================================
+   10. Home: background image slider
+   ========================================================= */
+
 .body-bg-slider {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
+
     width: 100%;
-    height: 100%;
-    z-index: -1; /* Header နဲ့ Main content တွေရဲ့ အောက်နောက်ဆုံးမှာ ထားမည် */
+    height: 100vh;
     overflow: hidden;
+    pointer-events: none;
 }
 
-/* ဓာတ်ပုံ ၃ ပုံကို ဘေးချင်းယှဉ်တန်းစီခြင်း */
 .body-bg-slider .slides {
     display: flex;
-    width: 300%; /* ပုံ ၃ ပုံမို့လို့ 300% ပေးခြင်း */
+    width: 300%;
     height: 100%;
-    animation: bodySlideAnimation 15s infinite ease-in-out; /* Slide ဖြစ်မည့် Animation */
+    animation: bodySlideAnimation 15s ease-in-out infinite;
 }
 
-/* တစ်ပုံချင်းစီ၏ အကျယ်အဝန်း */
 .body-bg-slider .slides img {
-    width: 33.333%;
+    flex: 0 0 calc(100% / 3);
+    width: calc(100% / 3);
     height: 100%;
-    object-fit: cover; /* ပုံမရှုံ့သွားဘဲ ညီညာစွာ ပြည့်နေစေရန် */
+    object-fit: cover;
 }
 
-/* ဓာတ်ပုံပေါ်တွင် အဖြူရောင် ခပ်မှိန်မှိန် အလွှာခံခြင်း */
 .bg-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3); 
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
 }
 
-/* 🌟 Slide ရွေ့မည့် Animation (စာလုံးပေါင်း မှန်ကန်စေရန် ပြင်ထားသည်) */
 @keyframes bodySlideAnimation {
-    0% { transform: translateX(0%); }             /* ပထမပုံ */
-    28% { transform: translateX(0%); }
-    33% { transform: translateX(-33.333%); }      /* ဒုတိယပုံသို့ ရွေ့မည် */
-    61% { transform: translateX(-33.333%); }
-    66% { transform: translateX(-66.666%); }      /* တတိယပုံသို့ ရွေ့မည် */
-    95% { transform: translateX(-66.666%); }
-    100% { transform: translateX(0%); }           /* ပထမပုံသို့ ပြန်ရောက်မည် */
+    0%, 28% {
+        transform: translateX(0);
+    }
+    33%, 61% {
+        transform: translateX(-33.333333%);
+    }
+    66%, 95% {
+        transform: translateX(-66.666667%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
+
+
+/* =========================================================
+   11. Home: hero text and call-to-action
+   ========================================================= */
 
 .hero-slider-section {
     position: relative;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
     display: flex;
     align-items: center;
+    width: 100%;
+    /* 82px header + 40px main top padding */
+    min-height: calc(100vh - 122px);
+    overflow: hidden;
 }
 
 .hero-container {
     position: relative;
     z-index: 3;
     width: 100%;
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding: 40px 0;
 }
 
 .hero-content {
     position: relative;
     width: 100%;
     max-width: 700px;
-    min-height: 220px;
+    display: grid;
 }
 
+/* Stack the three slides in the same grid cell.
+   The longest slide determines the height on smaller screens. */
 .hero-text {
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-area: 1 / 1;
+    align-self: center;
     width: 100%;
     text-align: left;
     opacity: 0;
@@ -411,11 +467,11 @@ main {
 }
 
 .hero-text h2 {
-    font-size: 40px;
+    margin: 0 0 20px;
+    color: var(--white);
+    font-size: clamp(26px, 4vw, 40px);
     font-weight: 800;
-    color: #ffffff;
     line-height: 1.3;
-    margin-bottom: 20px;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
@@ -431,26 +487,12 @@ main {
     animation: textFade3 15s infinite;
 }
 
-/* ပထမစာသား ပေါ်မည့် အချိန် (0% မှ 28% အထိ) */
 @keyframes textFade1 {
-    0% {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateX(-60px);
-    }
-
-    5% {
+    0%, 28% {
         opacity: 1;
         visibility: visible;
         transform: translateX(0);
     }
-
-    28% {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(0);
-    }
-
     33%, 100% {
         opacity: 0;
         visibility: hidden;
@@ -458,26 +500,17 @@ main {
     }
 }
 
-/* ဒုတိယစာသား ပေါ်မည့် အချိန် (33% မှ 61% အထိ) */
 @keyframes textFade2 {
     0%, 28% {
         opacity: 0;
         visibility: hidden;
-        transform: translateY(50px);
+        transform: translateY(30px);
     }
-
-    33% {
+    33%, 61% {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
     }
-
-    61% {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
     66%, 100% {
         opacity: 0;
         visibility: hidden;
@@ -485,30 +518,21 @@ main {
     }
 }
 
-/* တတိယစာသား ပေါ်မည့် အချိန် (66% မှ 95% အထိ) */
 @keyframes textFade3 {
     0%, 61% {
         opacity: 0;
         visibility: hidden;
-        transform: translateX(60px);
+        transform: translateX(30px);
     }
-
-    66% {
+    66%, 95% {
         opacity: 1;
         visibility: visible;
         transform: translateX(0);
     }
-
-    95% {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(0);
-    }
-
     100% {
         opacity: 0;
         visibility: hidden;
-        transform: translateX(30px);
+        transform: translateX(20px);
     }
 }
 
@@ -516,85 +540,78 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 20px;
+    padding: 16px 24px;
+
+    border: 0;
+    border-radius: 60px;
     background-color: var(--teal);
     color: var(--white);
     font-size: 15px;
     font-weight: 600;
-    font-family: inherit; /* Website ရဲ့ Font ပုံစံကို ယူမည် */
-    border: none;        /* Button ၏ မူလ Border ကို ဖြုတ်ခြင်း */
-    border-radius: 60px;
-    cursor: pointer;     /* Mouse တင်လျှင် လက်ပုံစံပေါ်စေရန် */
+    cursor: pointer;
     box-shadow: 0 4px 12px rgba(36, 115, 110, 0.25);
-    transition: background-color 1000s ease, transform 0.5s ease, padding 0.5s ease;}
 
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
 
 .hero-btn::after {
     content: "→";
-    display: inline-block;
-    transition: transform 24s ease;
+    transition: transform 0.2s ease;
 }
+
 .hero-btn:hover {
     background-color: var(--dark);
-    transform: translateY(-2px);  /* ဘယ်ဘက်သို့ အနည်းငယ် တိုးထွက်ကျယ်လာမည် */
-    padding-right: 56px; /* ညာဘက်သို့ အနည်းငယ် တိုးထွက်ကျယ်လာမည် */
+    transform: translateY(-2px);
 }
 
 .hero-btn:hover::after {
-    transform: translate(4px);
-}
-/* News Section*/
-.news-section {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    padding: 60px 0;
-    margin-top: 40px;
-    text-align: center;
+    transform: translateX(4px);
 }
 
 
-/*Location Section*/
+/* =========================================================
+   12. Home: News and Locations
+   ========================================================= */
 
+.news-section,
 .locations-section {
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 60px 0;
     margin-top: 40px;
+    padding: 60px 0;
     text-align: center;
 }
 
-/* Section Title */
+.news-title,
 .locations-title {
+    margin: 0 0 30px;
+    color: var(--dark);
     font-size: 32px;
     font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 30px;
 }
 
-/* Three Cards Layout */
 .locations-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
 }
 
-/* Individual Card */
 .location-card {
     display: block;
     overflow: hidden;
-    background: #fff;
+
     border: 1px solid var(--line);
     border-radius: 14px;
+    background-color: var(--white);
+    color: var(--dark);
     text-align: left;
     text-decoration: none;
-
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Image */
 .card-image {
     width: 100%;
     height: 220px;
@@ -602,23 +619,22 @@ main {
 }
 
 .card-image img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform 0.4s ease;
 }
 
-/* Card Text */ 
 .card-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
     padding: 20px;
+    color: var(--dark);
     font-size: 17px;
     font-weight: 600;
-    color: var(--dark)
 }
 
 .arrow {
@@ -626,30 +642,110 @@ main {
     font-size: 22px;
 }
 
-/* Hover Effect */ 
 .location-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
 }
 
 .location-card:hover .card-image img {
     transform: scale(1.05);
 }
 
+/* For the <a class="news-button">Browse All News →</a> link. */
+.news-button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 16px 32px;
+
+    border: 3px solid #1f9ce9;
+    border-radius: 50px;
+    background-color: var(--white);
+    color: #126da4;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.news-button:hover {
+    background-color: #126da4;
+    border-color: #126da4;
+    color: var(--white);
+}
+
+
+/* =========================================================
+   13. Tablet and mobile
+   ========================================================= */
+
 @media (max-width: 850px) {
-    .location-grid {
+    .header-inner {
+        flex-wrap: wrap;
+        gap: 0;
+        padding: 14px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+        padding-top: 12px;
+
+        /* Keep long menus usable on short screens. */
+        max-height: 65vh;
+        overflow-y: auto;
+    }
+
+    /* common.js adds this class when Menu is opened. */
+    .nav.is-open {
+        display: flex;
+    }
+
+    .nav a {
+        display: block;
+        padding: 12px 0;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .locations-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 550px) {
+    .hidden_container {
+        flex-direction: column;
+    }
+
+    .hidden_container .info_hospital,
+    .hidden_container .contact {
+        padding: 14px;
+    }
+
+    .hidden_container .info_hospital {
+        border-right: 0;
+        border-bottom: 1px solid #eee;
+    }
+
     .locations-grid {
         grid-template-columns: 1fr;
-
     }
+
+    .news-section,
     .locations-section {
-        padding: 40px 0;
         margin-top: 20px;
+        padding: 40px 0;
     }
 
     .card-image {
@@ -657,47 +753,29 @@ main {
     }
 }
 
-.news-button {
-    display: block;
-    margin: 35px auto 0;
 
-    padding: 20px 40px;
+/* =========================================================
+   14. Reduced motion
+   ========================================================= */
 
-    background-color: var(--white);
-    color: rgb(31, 156, 233);
+@media (prefers-reduced-motion: reduce) {
+    .body-bg-slider .slides,
+    .hero-text {
+        animation: none;
+    }
 
-    border: 3px solid rgb(31, 156, 233);
-    border-radius: 50px;
+    /* Keep the first message visible when slides do not move. */
+    .hero-text.text-1 {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
 
-    font-size: 16px;
-    font-weight: 600;
-
-    cursor: pointer;
-}
-
-.news-button:hover {
-    background-color: rgb(31, 156, 233);
-    color: var(--white);
-}
-
-.register-box {
-    padding: 5px;
-    background-color: #066a75;
-    color: white;
-    border: 3px solid #066a75;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.signIn-box {
-    padding: 5px;
-    background-color: #066a75;
-    color: white;
-    border: 3px solid #066a75;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
+    .hero-btn,
+    .hero-btn::after,
+    .hidden_container,
+    .location-card,
+    .card-image img {
+        transition: none;
+    }
 }

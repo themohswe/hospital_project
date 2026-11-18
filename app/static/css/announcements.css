@@ -1,0 +1,405 @@
+/* ===== 1. Page title ===== */
+.announcements-page {
+    padding-top: 32px;
+    padding-bottom: 40px;
+    color: var(--text, #183034);
+}
+
+.announcements-intro {
+    margin-bottom: 20px;
+}
+
+.announcements-intro h1 {
+    margin: 0 0 6px;
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.announcements-intro p {
+    margin: 0;
+    color: var(--muted, #52676c);
+    font-size: inherit;
+}
+
+/* ===== 2. Important notice ===== */
+.important-notice {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    border: 1px solid #efbf79;
+    border-radius: 10px;
+    background: #fff4df;
+    color: #663b12;
+}
+
+.important-notice p {
+    margin: 0;
+}
+
+/* ===== 3. Category buttons and search ===== */
+.announcements-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    margin-bottom: 18px;
+}
+
+.announcement-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    font : inherit;
+    line-height : 1.4;
+}
+
+.announcement-filter {
+    min-height: 40px;
+    padding: 7px 14px;
+    border: 1px solid var(--line, #d6e5e2);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text, #183034);
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.announcement-filter:hover {
+    border-color: var(--teal, #24736e);
+    background-color: var(--dark, #193e3b);
+    color: var(--white, #fff);
+}
+
+.announcement-filter[aria-pressed="true"] {
+    border-color: var(--teal, #24736e);
+    background: var(--teal, #24736e);
+    color: #fff;
+}
+
+.announcement-search {
+    display: flex;
+    align-items: center;
+    flex: 0 1 320px;
+    gap: 10px;
+    min-width: 0;
+    padding: 0 12px;
+    border: 1px solid var(--line, #d6e5e2);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--muted, #52676c);
+}
+
+.announcement-search input {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    color: var(--text, #183034);
+    font: inherit;
+}
+
+.announcement-search:focus-within {
+    outline: 2px solid var(--teal, #24736e);
+    outline-offset: 2px;
+}
+
+.announcement-search input:focus {
+    outline: none;
+}
+
+.announcements-page :is(button, summary, a):focus-visible {
+    outline: 2px solid var(--teal, #24736e);
+    outline-offset: 3px;
+}
+
+/* ===== 4. Announcement table ===== */
+.announcements-table {
+    width: 100%;
+    border: 1px solid var(--line, #d6e5e2);
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.announcements-table th,
+.announcements-table td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.announcements-table th {
+    background: var(--mint, #eef8f5);
+    font-size: 0.9rem;
+}
+
+.announcements-table td {
+    border-top: 1px solid var(--line, #d6e5e2);
+}
+
+.announcement-title {
+    width: 58%;
+}
+
+.announcement-title strong {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.announcement-title p {
+    margin: 4px 0 0;
+    color: var(--muted, #52676c);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.announcement-row time {
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: var(--muted, #52676c);
+}
+
+.announcement-badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: var(--mint, #eef8f5);
+    color: var(--dark, #193e3b);
+    font-size: 0.8rem;
+}
+
+.announcement-row[data-category="clinic"] .announcement-badge {
+    background: #e4efff;
+    color: #24528b;
+}
+
+.announcement-row[data-category="hospital"] .announcement-badge {
+    background: #e8ebfa;
+    color: #484979;
+}
+
+.announcement-row[data-category="health"] .announcement-badge {
+    background: #e4f5e9;
+    color: #255b3c;
+}
+
+.announcement-row td:last-child {
+    width: 1%;
+    text-align: right;
+}
+
+.announcement-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--teal, #24736e);
+    cursor: pointer;
+}
+
+.announcement-toggle:hover {
+    background: var(--mint, #eef8f5);
+}
+
+/* မြားကို ဖွင့်ထားတဲ့အခါ အောက်ဘက်လှည့်ပြမယ်။ */
+.announcement-toggle[aria-expanded="true"] i {
+    transform: rotate(90deg);
+}
+
+.announcement-details p {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: var(--mint, #eef8f5);
+    line-height: 1.5;
+}
+
+/* Mobile မှာ row layout ပြောင်းထားရင်လည်း hidden က အလုပ်လုပ်မယ်။ */
+.announcements-page [hidden] {
+    display: none !important;
+}
+
+#announcement-empty {
+    margin: 12px 0 0;
+    padding: 16px;
+    border: 1px solid var(--line, #d6e5e2);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--muted, #52676c);
+}
+
+/* ===== 5. FAQ and contact ===== */
+.announcements-support {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.announcements-faq,
+.announcements-help {
+    padding: 18px;
+    border: 1px solid var(--line, #d6e5e2);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.announcements-support h2 {
+    margin: 0 0 12px;
+    font-size: 1.15rem;
+}
+
+.announcements-support i,
+.announcements-page .announcement-details a,
+.announcements-support a {
+    color: var(--teal, #24736e);
+}
+
+.announcements-faq details {
+    border: 1px solid var(--line, #d6e5e2);
+    border-radius: 8px;
+}
+
+.announcements-faq details + details {
+    margin-top: 8px;
+}
+
+.announcements-faq summary {
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.announcements-faq details p {
+    margin: 0;
+    padding: 0 12px 12px;
+    color: var(--muted, #52676c);
+}
+
+.announcements-help p {
+    margin: 10px 0;
+}
+
+.announcements-help a {
+    overflow-wrap: anywhere;
+}
+
+.announcement-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.announcement-pagination button {
+    min-width: 42px;
+    min-height: 42px;
+    padding: 6px 10px;
+    border: 1px solid var(--line, #d6e5e2);
+    border-radius: 8px;
+    background: var(--white, #fff);
+    color: var(--text, #183034);
+    font: inherit;
+    cursor: pointer;
+}
+
+.announcement-pagination button:hover:not(:disabled),
+.announcement-pagination button[aria-current="page"] {
+    border-color: var(--teal, #24736e);
+    background: var(--teal, #24736e);
+    color: var(--white, #fff);
+}
+
+.announcement-pagination button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* ===== 6. Mobile layout ===== */
+@media (max-width: 640px) {
+    .announcements-page {
+        padding-top: 24px;
+    }
+
+    .announcement-search {
+        flex: 1 1 100%;
+    }
+
+    /* Column labels ကို screen reader အတွက် ဆက်ထားမယ်။ */
+    .announcements-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .announcements-table,
+    .announcements-table tbody,
+    .announcement-details,
+    .announcement-details td {
+        display: block;
+    }
+
+    .announcement-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 6px 8px;
+        align-items: center;
+        padding: 12px;
+        border-top: 1px solid var(--line, #d6e5e2);
+    }
+
+    .announcement-row:first-child {
+        border-top: 0;
+    }
+
+    .announcements-table .announcement-row td {
+        padding: 0;
+        border: 0;
+    }
+
+    .announcement-row .announcement-title {
+        grid-column: 1 / 3;
+        width: auto;
+        overflow-wrap: anywhere;
+    }
+
+    .announcement-row td:last-child {
+        grid-column: 3;
+        grid-row: 1 / 3;
+        width: auto;
+    }
+
+    .announcement-row time {
+        font-size: 0.8rem;
+    }
+
+    .announcement-details td {
+        padding: 0 12px 12px;
+        border: 0;
+    }
+
+    .announcements-support {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .announcements-intro h1 {
+        font-size: 28px;
+    }
+}
