@@ -303,6 +303,7 @@ flex-direction: column; --> card ထဲက ဟာတွေကို column အ�
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     width: 60px;
     height: 60px;
@@ -313,6 +314,13 @@ flex-direction: column; --> card ထဲက ဟာတွေကို column အ�
     color: var(--teal);
     font-size: 22px;
     font-weight: 700;
+}
+
+.doctor-result-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .doctor-result-card h3 {

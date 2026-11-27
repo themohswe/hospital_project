@@ -16,7 +16,7 @@
     <header class="site-header">
             <div class="container header-inner">
                 <div class="brand-dropdown">
-                    <a class="brand">
+                    <a class="brand" href="{{ url_for('main.home') }}">
                         <span class="brand-mark" aria-hidden="true">✚</span>
                         CareHub
                     </a>
@@ -38,8 +38,8 @@
                     Menu
                 </button>
                 <nav class="nav" id="primary-nav" aria-label="Main navigation">
-                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">home</a>
-                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">departments</a>
+                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">Home</a>
+                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">Departments</a>
                     <a href="{{ url_for('patient.dashboard') }}" data-i18n="nav_records" class="record_hidden">Patient Records</a>
                     <a href="{{ url_for('main.announcements') }}" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
 
@@ -48,7 +48,7 @@
                         <a href="register.html" style="text-decoration: none;">Register</a>
                     </button>
                     <button class="signIn-box">
-                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">logout</a>
+                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">Logout</a>
                     </button>
                 </nav>
             </div>
