@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Department Details | CareHub
+        </title>
+
+        <!--Font Awesome for icon-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+        <!--Styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/department-detail.css') }}">
+        
+        <!-- shared mobile menu -->
+        <script src="{{ url_for('static', filename='js/common.js') }}" defer></script>
+        
+        <!-- Data must load before the service -->
+        <script src="{{ url_for('static', filename='js/data.js') }}" defer></script>
+        
+
+        <!-- Service must load before the page logic -->
+        <script src="{{ url_for('static', filename='js/hospital-service.js') }}" defer></script>    
+        <script src="{{ url_for('static', filename='js/department-detail.js') }}" defer></script>    
+    </head>
+
+    <body>
+        <!--Common Header-->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="/">
+                    <span class="brand-mark" aria-hidden="true">✚</span>
+                    CareHub
+                </a>
+                <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false">
+                    Menu
+                </button>
+
+                <nav class="nav" id="primary-nav" aria-label="Main navigation">
+                    <a href="{{ url_for('main.home') }}">Home</a>
+                    <a href="{{ url_for('main.departments') }}" aria-current="location">Departments</a>
+                    <a href="{{ url_for('patient.dashboard') }}">Patient Records</a>
+                    <a href="{{ url_for('main.announcements') }}">Announcements</a>
+                </nav>
+            </div>
+        </header>
+        
+        <main id="main" class="container">
+            
+            <!--Back to department list-->
+            <a class="back-link" href = "/departments">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                All Departments
+            </a>
+
+            <!--Department introduction-->
+            <section class="department-intro"
+                aria-labelledby="department-title">
+                <div class="department-heading">
+                    <span class="department-symbol" aria-hidden="true">
+                        <i id="department-icon"
+                            class="fa-solid fa-hospital"></i>
+                    </span>
+
+                    <div>
+                        <p id="department-category" class="department-category">
+                            Department information
+                        </p>
+                        <h1 id="department-title">Department Details</h1>
+                    </div>
+                </div>
+
+                <p id="department-description">
+                    Department information and doctor profiles will appear here. 
+                </p>
+            </section>
+
+            <!-- Used for missing or invalid department IDs -->
+            <p id="department-error" role="alert" hidden></p>
+
+            <!-- Department doctors -->
+            <section id="doctors-section"
+                    class="doctors-section"
+                    aria-labelledby="doctors-title">
+                
+                <div class="section-heading">
+                    <h2 id="doctors-title">Our Doctors</h2>
+                    <p id="doctor-count" aria-live="polite"></p>
+                </div>
+
+                <!-- JavaScript will insert doctor cards here -->
+                <div id="doctor-list" class="doctor-grid"></div>
+                <p id="doctor-empty" hidden>
+                    Doctor information is not available for this department yet.
+                </p>
+            </section>
+
+            <!-- Shown only after selecting a doctor. -->
+             <section id="doctor-profile"   class="doctor-profile"
+                aria-labelledby="profile-name" hidden>
+
+                <div class="section-heading">
+                    <h2>Doctor Profile &amp; Schedule</h2>
+                    <button type="button"   id="close-profile"
+                        class="close-profile">
+                            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                            Close
+                    </button>
+                </div>
+
+                <div class="profile-layout">
+
+                    <!-- Doctor information-->
+                    <div class="profile-information">
+                        <div id="profile-avatar"    class="doctor-avatar"
+                            aria-hidden="true"></div>
+                            <!-- JavaScript will insert the avatar content here -->
+                        <h3 id="profile-name"></h3>
+
+                        <p id="profile-department"  class="profile-department"></p>
+
+                        <h4>Specialty</h4>
+                        <p id="profile-specialty"></p>
+
+                        <h4>About the Doctor</h4>
+                        <p id="profile-about"></p>                       
+                    </div>
+
+                    <!-- Working schedule -->
+                    <div class="profile-schedule">
+                        <h3>Weekly Clinic Schedule</h3>
+                        <table class="schedule-table">
+                            <caption class="schedule-caption">
+                                Sample consultation days and times
+                            </caption>
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Day</th>
+                                    <th scope="col">Time</th>
+                                </tr>
+                            </thead>
+
+                            <!-- JavaScript will insert schedule rows here -->
+                            <tbody id="schedule-body"></tbody>
+                        </table>
+
+                        <button type="button"
+                                class="appointment-button"
+                                disabled>
+                            Request Appointment — Coming Soon
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <p class="demo-note">
+                Student demo: all doctor profiles and schedules are fictional.
+            </p>
+        </main>
+
+        <!--Common footer-->
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <div>
+                    <span class="brand">
+                        <span class="brand-mark" aria-hidden="true">✚</span>
+                        CareHub</span>
+                    <p>
+                        Care made simple.
+                    </p>
+                </div>
+
+                <!--Address, ph , email -->
+                <div class="footer-contact">
+                    <p>
+                         <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                         123 Sample Street, Seoul (fictional address)
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <a href="tel:020000000">
+                            02-000-0000
+                        </a>
+                    <p>
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:carehub@example.com">
+                            carehub@example.com
+                        </a>
+                    </p>
+                </div>
+                <p class="copyright"> &copy; 2026 CareHub | Student demo</p>
+            </div>
+        </footer>
+    </body>
+</html>

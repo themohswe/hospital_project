@@ -9,6 +9,7 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/patient_dashboard.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css')}}">
+    <script src="{{ url_for('static', filename='js/common.js')}}" defer></script>
 </head>
 
 <body>
@@ -37,20 +38,21 @@
                     Menu
                 </button>
                 <nav class="nav" id="primary-nav" aria-label="Main navigation">
-                    <a href="main.html" data-i18n="nav_dept" class="departments_hidden">home</a>
-                    <a href="departments.html" data-i18n="nav_dept" class="departments_hidden">departments</a>
-                    <a href="patient_dashboard.html" data-i18n="nav_records" class="record_hidden">Patient Records</a>
-                    <a href="announcements.html" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
+                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">home</a>
+                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">departments</a>
+                    <a href="{{ url_for('patient.dashboard') }}" data-i18n="nav_records" class="record_hidden">Patient Records</a>
+                    <a href="{{ url_for('main.announcements') }}" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
 
-                    
+
                     <button class="register-box">
                         <a href="register.html" style="text-decoration: none;">Register</a>
                     </button>
                     <button class="signIn-box">
-                        <a href="signIn.html" style="text-decoration: none;">SignIn</a>
+                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">logout</a>
                     </button>
                 </nav>
             </div>
+    </header>
 
 <div class="dashboard-container">
 
@@ -59,23 +61,21 @@
         <div class="sidebar-menu">
             <p class="menu-title">MENU</p>
 
-            <a href="#" class="menu-item active">
+            <a href=" {{ url_for('patient.dashboard') }}"
+               class="menu-item {% if request.endpoint == 'patient.dashboard' %}active{% endif %}">
                 <span>▦</span> Dashboard
             </a>
 
-            <a href="#" class="menu-item">
+            <a href=" {{ url_for('patient.history') }}" class="menu-item {% if request.endpoint == 'patient.history' %}active{% endif %}">
                 <span>▤</span> Medical History
             </a>
 
-            <a href="#" class="menu-item">
-                <span>♧</span> Test Results
-            </a>
 
-            <a href="#" class="menu-item">
+            <a href="{{ url_for('patient.prescriptions') }}" class="menu-item">
                 <span>▣</span> Prescriptions
             </a>
 
-            <a href="#" class="menu-item">
+            <a href="{{ url_for('patient.appointments')}}" class="menu-item">
                 <span>▦</span> Appointments
             </a>
 
@@ -92,7 +92,7 @@
         </div>
 
         <div class="sidebar-bottom">
-            <a href="#" class="menu-item logout">
+            <a href="{{ url_for('auth.logout')}}" class="menu-item logout">
                 <span>↪</span> Logout
             </a>
         </div>
@@ -138,7 +138,7 @@
 
             <div class="patient-id">
                 <span>Patient ID</span>
-                <strong>PT-2026-001</strong>
+                <strong>{{ patient["patient_id"]}}</strong>
             </div>
 
         </section>
@@ -151,7 +151,7 @@
                 <div class="card-icon blue">▤</div>
                 <div>
                     <p>Total Medical Records</p>
-                    <h2>12</h2>
+                    <h2>{{ total_records }}</h2>
                     <small>All recorded visits</small>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                 <div class="card-icon purple">♧</div>
                 <div>
                     <p>Lab Test Results</p>
-                    <h2>8</h2>
+                    <h2>{{ lab_count }}</h2>
                     <small>Available results</small>
                 </div>
             </div>
@@ -169,7 +169,7 @@
                 <div class="card-icon orange">▣</div>
                 <div>
                     <p>Prescriptions</p>
-                    <h2>3</h2>
+                    <h2>{{ prescription_count }}</h2>
                     <small>Medical prescriptions</small>
                 </div>
             </div>
@@ -205,51 +205,29 @@
 
                 <div class="history-list">
 
+                    {% for r in records[:5]%}
                     <div class="history-item">
-                        <div class="history-icon blue">🩸</div>
-
-                        <div class="history-details">
-                            <strong>Blood Test</strong>
-                            <p>Laboratory Department</p>
-                            <small>October 25, 2026</small>
+                        <div class="history-icon {{ loop.cycle('blue', 'purple', 'orange') }}">
+                            {% if r["department"] == "Laboratory" %} 🩸
+                            {% elif r["department"] == "Radiology" %} 🩻
+                            {% else %}✚
+                            {% endif %}
                         </div>
 
+                        <div class="history-details">
+                            <strong>{{ r["test_name"] }}</strong>
+                            <p>{{ r["department"] or "General" }} Department</p>
+                            <small>{{ r["record_date"] or "-" }}</small>
+                        </div>
                         <span class="status completed">
                             Completed
                         </span>
-                    </div>
-
-
-                    <div class="history-item">
-                        <div class="history-icon purple">🩻</div>
-
-                        <div class="history-details">
-                            <strong>Chest X-Ray</strong>
-                            <p>Radiology Department</p>
-                            <small>October 12, 2026</small>
                         </div>
+                        {% else %}
+                        <p>No medical records yet.</p>
+                        {% endfor %}
 
-                        <span class="status completed">
-                            Completed
-                        </span>
                     </div>
-
-
-                    <div class="history-item">
-                        <div class="history-icon orange">✚</div>
-
-                        <div class="history-details">
-                            <strong>General Checkup</strong>
-                            <p>General Medicine</p>
-                            <small>September 18, 2026</small>
-                        </div>
-
-                        <span class="status completed">
-                            Completed
-                        </span>
-                    </div>
-
-                </div>
 
             </div>
 
@@ -264,35 +242,26 @@
                     </div>
                 </div>
 
+               
+
+                {% for a in appointments %}
                 <div class="appointment-item">
 
                     <div class="appointment-date">
-                        <strong>05</strong>
-                        <span>NOV</span>
+                        <strong>{{ a["appointment_date"][8:10] }}</strong>
+                        <span>{{ ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][a["appointment_date"][5:7]|int - 1] }}</span>
                     </div>
 
                     <div class="appointment-details">
-                        <strong>General Checkup</strong>
-                        <p>Dr. Michael Brown</p>
-                        <small>10:30 AM</small>
+                        <strong>{{ a["title"] }}</strong>
+                        <p>{{ a["doctor_name"] or "-" }}</p>
+                        <small>{{ a["appointment_time"] or "-" }}</small>
                     </div>
 
                 </div>
-
-                <div class="appointment-item">
-
-                    <div class="appointment-date">
-                        <strong>12</strong>
-                        <span>NOV</span>
-                    </div>
-
-                    <div class="appointment-details">
-                        <strong>Dental Examination</strong>
-                        <p>Dr. Emily Wilson</p>
-                        <small>02:00 PM</small>
-                    </div>
-
-                </div>
+                {% else %}
+                <p>No upcoming appointments.</p>
+                {% endfor %}
 
                 <a href="#" class="appointment-link">
                     View All Appointments →
@@ -319,22 +288,27 @@
 
                 <div class="health-item">
                     <span>Blood Type</span>
-                    <strong>O+</strong>
+                    <strong>
+                        {{ patient["blood_type"] if patient and patient["blood_type"] else "-" }}
+                    </strong>
                 </div>
 
                 <div class="health-item">
                     <span>Height</span>
-                    <strong>175 cm</strong>
+                   
+                    <strong>{{ health["height_cm"] }} cm</strong>   
                 </div>
 
                 <div class="health-item">
                     <span>Weight</span>
-                    <strong>70 kg</strong>
+                    <strong>{{ health["weight_kg"] }} kg</strong>
                 </div>
 
                 <div class="health-item">
                     <span>Allergies</span>
-                    <strong>None recorded</strong>
+                    <strong>
+                        {{ health["allergies"] if health and health["allergies"] else "None recorded" }}
+                    </strong>
                 </div>
 
             </div>

@@ -6,13 +6,15 @@
         <title>
             Departments | CareHub
         </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
         <!--
         defer ကြောင့် HTML ကို ဆက်ဖတ်နေစဉ် JS ဖိုင်ကို download လုပ်နိုင်ပြီး၊
          HTML ဖတ်ပြီးမှ JavaScript ကို run မယ်။ 
          ဒါကြောင့် JS က header ထဲက button နဲ့ navigation ကို ရှာသုံးနိုင်တယ်။
          -->
-        <script src="../js/common.js" defer></script>
+        <script src="{{ url_for('static', filename='js/common.js') }}" defer></script>
+        <!--<script src="../js/common.js" defer></script>-->
     </head>
 
     <body>
@@ -52,11 +54,10 @@
                     Menu
                 </button>
                 <nav class="nav" id="primary-nav" aria-label="Main navigation">
-                    <a href="main.html" data-i18n="nav_dept" class="departments_hidden">home</a>
-                    <a href="departments.html" data-i18n="nav_dept" class="departments_hidden">departments</a>
-                    <a href="patient_dashboard.html" data-i18n="nav_records" class="record_hidden">Patient Records</a>
-                    <a href="announcements.html" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
-
+                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">Home</a>
+                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">Departments</a>
+                    <a href="{{ url_for('patient.dashboard') }}" data-i18n="nav_records" class="record_hidden">Patient Records</a>
+                    <a href="{{ url_for('main.announcements') }}" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
                     
                     <button class="register-box">
                         <a href="{{ url_for('auth.register') }} " style="text-decoration: none;">Register</a>
@@ -64,9 +65,7 @@
                     <button class="signIn-box">
                         <a href="{{ url_for('auth.login') }}" style="text-decoration: none;">SignIn</a>
                     </button>
-                    <button class="signIn-box">
-                        <a href="{{ url_for('patient.dashboard') }}" style="text-decoration: none;">Dashboard</a>
-                    </button>
+
                 </nav>
             </div>
              <!--If u click carehub-->
@@ -144,8 +143,7 @@
                         </div>
                     </a>
                 </div>
-                <button type="button" class="news-button"><a href="announcement.html" style="text-decoration: none;">Browser All News +++</a></button>   
-                    
+                <a href="/announcements" class="news-button" style="display: inline-block; text-decoration: none;">Browse All News+++ →</a>                    
             </section>
 
         
@@ -196,17 +194,35 @@
         <footer class="site-footer">
             <div class="container footer-inner">
                 <div>
-                    <span class="brand">✚ CareHub</span>
+                    <span class="brand">
+                        <span class="brand-mark" aria-hidden="true">✚</span>
+                        CareHub</span>
                     <p>
                         Care made simple.
                     </p>
                 </div>
-                <div>
-                    <p>123 Sample Street, Seoul (fictional address)</p>
-                    <p>Phone : 02-000-0000 | Email : carehub@example.com</p>
+
+                <!--Address, ph , email -->
+                <div class="footer-contact">
+                    <p>
+                         <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                         123 Sample Street, Seoul (fictional address)
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <a href="tel:020000000">
+                            02-000-0000
+                        </a>
+                    <p>
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:carehub@example.com">
+                            carehub@example.com
+                        </a>
+                    </p>
                 </div>
                 <p class="copyright"> &copy; 2026 CareHub | Student demo</p>
             </div>
+
         </footer>
     </body>
 </html>
