@@ -44,6 +44,17 @@ def dashboard():
         "SELECT COUNT(*) FROM prescription WHERE patient_id = ?", (pid,)
     ).fetchone()[0]
 
+    #new added to count real appointments
+    appointment_count = db.execute(
+        """
+        SELECT COUNT(*)
+        FROM appointment
+        WHERE patient_id = ?
+        AND appointment_date >= date('now')
+        """,
+        (pid,),
+    ).fetchone()[0]
+
     total_records = len(records)
     lab_count = sum(1 for r in records if r["department"] == "Laboratory")
 
@@ -56,6 +67,7 @@ def dashboard():
         total_records=total_records,
         lab_count=lab_count,
         prescription_count=prescription_count,
+        appointment_count=appointment_count,
     )
 
 

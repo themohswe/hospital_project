@@ -16,7 +16,7 @@
     <header class="site-header">
             <div class="container header-inner">
                 <div class="brand-dropdown">
-                    <a class="brand">
+                    <a class="brand" href="{{ url_for('main.home') }}">
                         <span class="brand-mark" aria-hidden="true">✚</span>
                         CareHub
                     </a>
@@ -38,8 +38,8 @@
                     Menu
                 </button>
                 <nav class="nav" id="primary-nav" aria-label="Main navigation">
-                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">home</a>
-                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">departments</a>
+                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">Home</a>
+                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">Departments</a>
                     <a href="{{ url_for('patient.dashboard') }}" data-i18n="nav_records" class="record_hidden">Patient Records</a>
                     <a href="{{ url_for('main.announcements') }}" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
 
@@ -48,7 +48,7 @@
                         <a href="register.html" style="text-decoration: none;">Register</a>
                     </button>
                     <button class="signIn-box">
-                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">logout</a>
+                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">Logout</a>
                     </button>
                 </nav>
             </div>
@@ -81,9 +81,7 @@
 
             <p class="menu-title">ACCOUNT</p>
 
-            <a href="#" class="menu-item">
-                <span>♙</span> My Profile
-            </a>
+            
 
             <a href="#" class="menu-item">
                 <span>⚙</span> Settings
@@ -178,7 +176,7 @@
                 <div class="card-icon green">▦</div>
                 <div>
                     <p>Appointments</p>
-                    <h2>2</h2>
+                    <h2>{{ appointment_count }}</h2>
                     <small>Upcoming appointments</small>
                 </div>
             </div>
@@ -198,7 +196,7 @@
                         <p>Your latest medical records</p>
                     </div>
 
-                    <a href="#" class="view-all">
+                    <a href="{{ url_for('patient.history') }}" class="view-all">
                         View All →
                     </a>
                 </div>
@@ -263,7 +261,7 @@
                 <p>No upcoming appointments.</p>
                 {% endfor %}
 
-                <a href="#" class="appointment-link">
+                <a href="{{ url_for('patient.appointments') }}" class="appointment-link">
                     View All Appointments →
                 </a>
 

@@ -87,6 +87,16 @@ async function initializeDepartmentSearch() {
             avatar.textContent = doctor.initials;
             avatar.setAttribute("aria-hidden", "true");
 
+            if (doctor.image) {
+                const photo = document.createElement("img");
+                photo.alt = "";
+
+                photo.addEventListener("load", function () {
+                    avatar.replaceChildren(photo);
+                });
+
+                photo.src = doctor.image;
+            }
             const name = document.createElement("h3");
             name.textContent = doctor.name;
 

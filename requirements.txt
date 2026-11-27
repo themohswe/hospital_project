@@ -1,9 +1,2 @@
-<a href="{{ url_for('patient.dashboard') }}"
-   class="menu-item {% if request.endpoint == 'patient.dashboard' %}active{% endif %}">
-    <span>▦</span> Dashboard
-</a>
-
-<a href="{{ url_for('patient.history') }}"
-   class="menu-item {% if request.endpoint == 'patient.history' %}active{% endif %}">
-    <span>▤</span> Medical History
-</a>
+Flask
+Werkzeug
