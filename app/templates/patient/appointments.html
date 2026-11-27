@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | CareHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/patient_dashboard.css')}}">
+    
+    <script src="{{ url_for('static', filename='js/common.js')}}" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+            <div class="container header-inner">
+                <div class="brand-dropdown">
+                    <a class="brand">
+                        <span class="brand-mark" aria-hidden="true">✚</span>
+                        CareHub
+                    </a>
+                    <div class="hidden_container">
+                        <div class="info_hospital">
+                           <h2>Hello! Welcome to the CareHub Hospital. We are dedicated to providing exceptional healthcare services with professional medical staff and modern facilities.</h2>
+                        </div>
+                        <div class="contact">
+                            <h2>Request an Appointment <br>
+                            +10-1111-2222</h2>
+                            <h2>
+                                Office Hours / (Except holidays)
+                                <br> Mon-Fri. 9:00am~5:30pm
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false">
+                    Menu
+                </button>
+                <nav class="nav" id="primary-nav" aria-label="Main navigation">
+                    <a href="{{ url_for('main.home') }}" data-i18n="nav_dept" class="departments_hidden">home</a>
+                    <a href="{{ url_for('main.departments') }}" data-i18n="nav_dept" class="departments_hidden">departments</a>
+                    <a href="{{ url_for('patient.dashboard') }}" data-i18n="nav_records" class="record_hidden">Patient Records</a>
+                    <a href="{{ url_for('main.announcements') }}" data-i18n="nav_news" class="annoucements_hidden">Announcements</a>
+
+
+                    <button class="register-box">
+                        <a href="register.html" style="text-decoration: none;">Register</a>
+                    </button>
+                    <button class="signIn-box">
+                        <a href="{{ url_for('auth.logout')}}" style="text-decoration: none;">logout</a>
+                    </button>
+                </nav>
+            </div>
+    </header>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-menu">
+            <p class="menu-title">MENU</p>
+
+            <a href="{{ url_for('patient.dashboard') }}" class="menu-item {% if request.endpoint == 'patient.dashboard' %}active{% endif %}">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="{{ url_for('patient.history') }}" class="menu-item {% if request.endpoint == 'patient.history' %}active{% endif %}">
+                <span>▤</span> Medical History
+            </a>
+
+            <a href="{{ url_for('patient.prescriptions')}}" class="menu-item">
+                <span>▣</span> Prescriptions
+            </a>
+
+            <a href="{{ url_for('patient.appointments')}}" class="menu-item">
+                <span>▦</span> Appointments
+            </a>
+
+            <p class="menu-title">ACCOUNT</p>
+
+            <a href="#" class="menu-item">
+                <span>♙</span> My Profile
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⚙</span> Settings
+            </a>
+
+        </div>
+
+        <div class="sidebar-bottom">
+            <a href="{{ url_for('auth.logout')}}" class="menu-item logout">
+                <span>↪</span> Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h2>Appointments</h2>
+                <p>All your appointments</p>
+            </div>
+            <div class="topbar-right">
+                <div class="profile">
+                    <div class="profile-avatar">{{ patient["name"][0] }}</div>
+                    <div class="profile-info">
+                        <strong>{{ patient["name"] }}</strong>
+                        <small>Patient</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+  
+        <section class="content-card">
+            <div class="section-header">
+                <div>
+                    <h3>Upcoming Appointments</h3>
+                    <p>Your scheduled visits</p>
+                </div>
+            </div>
+  
+            {% for a in upcoming %}
+            <div class="appointment-item">
+                <div class="appointment-date">
+                    <strong>{{ a["appointment_date"][8:10] }}</strong>
+                    <span>{{ ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][a["appointment_date"][5:7]|int - 1] }}</span>
+                </div>
+                <div class="appointment-details">
+                    <strong>{{ a["title"] }}</strong>
+                    <p>{{ a["doctor_name"] or "-" }}</p>
+                    <small>{{ a["appointment_date"] }} · {{ a["appointment_time"] or "-" }}</small>
+                </div>
+            </div>
+            {% else %}
+            <p>No upcoming appointments.</p>
+            {% endfor %}
+        </section>
+  
+        <section class="content-card" style="margin-top: 20px;">
+            <div class="section-header">
+                <div>
+                    <h3>Past Appointments</h3>
+                    <p>Your previous visits</p>
+                </div>
+            </div>
+  
+            {% for a in past %}
+            <div class="appointment-item">
+                <div class="appointment-date">
+                    <strong>{{ a["appointment_date"][8:10] }}</strong>
+                    <span>{{ ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][a["appointment_date"][5:7]|int - 1] }}</span>
+                </div>
+                <div class="appointment-details">
+                    <strong>{{ a["title"] }}</strong>
+                    <p>{{ a["doctor_name"] or "-" }}</p>
+                    <small>{{ a["appointment_date"] }} · {{ a["appointment_time"] or "-" }}</small>
+                </div>
+                <span class="status completed">{{ a["status"] }}</span>
+            </div>
+            {% else %}
+            <p>No past appointments.</p>
+            {% endfor %}
+        </section>
+  
+        <footer>© 2026 CareHub Hospital. All rights reserved.</footer>
+      </main>
+
+</div>
+
+</body>
+</html>

@@ -15,4 +15,4 @@ def close_db(e=None):
 
 def init_app(app):
     app.teardown_appcontext(close_db)
-
+ 

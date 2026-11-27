@@ -29,10 +29,10 @@
                 </button>
 
                 <nav class="nav" id="primary-nav" aria-label="Main navigation">
-                    <a href="/">Home</a>
-                    <a href="/departments">Departments</a>
-                    <a href="/patient-dashboard">Patient Records</a>
-                    <a href="/announcements" aria-current="page">Announcements</a>
+                    <a href="{{ url_for('main.home') }}">Home</a>
+                    <a href="{{ url_for('main.departments') }}">Departments</a>
+                    <a href="{{ url_for('patient.dashboard') }}">Patient Records</a>
+                    <a href="{{ url_for('main.announcements') }}" aria-current="page">Announcements</a>
                 </nav>
             </div>
         </header>
